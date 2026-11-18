@@ -32,8 +32,9 @@
   }
 
   // ---------------------------------------------------------------- autocomplete
-  var suggestTimer = null;
+  var suggestTimer = null, suggestSeq = 0;
   function closeSuggest() {
+    clearTimeout(suggestTimer); suggestSeq++; // drop any in-flight suggestion request
     list.hidden = true; list.innerHTML = ""; state.suggestions = []; state.active = -1;
     input.setAttribute("aria-expanded", "false"); input.removeAttribute("aria-activedescendant");
   }
@@ -64,10 +65,11 @@
     clearTimeout(suggestTimer);
     var prefix = input.value;
     if (!prefix.trim()) return closeSuggest();
+    var seq = ++suggestSeq;
     suggestTimer = setTimeout(async function () {
       try {
         var data = await getJSON("/api/suggest?k=8&q=" + encodeURIComponent(prefix));
-        if (input.value === prefix) renderSuggest(prefix.trim(), data.suggestions);
+        if (seq === suggestSeq && input.value === prefix) renderSuggest(prefix.trim(), data.suggestions);
       } catch (e) { closeSuggest(); }
     }, 90);
   });
