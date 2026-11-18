@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Sift search engine</title><style>
+body { margin:0; width:1280px; height:720px; overflow:hidden; font-family:"Segoe UI",system-ui,sans-serif; background:linear-gradient(135deg,#04110b,#0f3324 52%,#16573a); color:#fff; position:relative; }
+body::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 10%, rgba(190,242,100,.20), transparent 45%); pointer-events:none; }
+.left { position:absolute; left:64px; top:52px; width:540px; z-index:1; }
+.badge { display:inline-block; background:rgba(255,255,255,.15); padding:7px 14px; border-radius:99px; font-size:15px; margin-bottom:18px; }
+h1 { font-size:56px; line-height:1.02; margin:0 0 10px; letter-spacing:-1px; }
+.tag { font-size:21px; color:#d9f99d; margin:0 0 20px; }
+pre { background:#020617; color:#cbd5e1; border-radius:12px; padding:13px 16px; font:13.5px/1.62 Consolas, monospace; margin:0 0 20px; box-shadow:0 10px 30px rgba(0,0,0,.35); white-space:pre-wrap; }
+pre .k { color:#7dd3fc; } pre .w { color:#fbbf24; } pre .g { color:#6ee7b7; } pre .m { color:#94a3b8; }
+ul { list-style:none; padding:0; margin:0; font-size:18.5px; line-height:1.7; }
+li::before { content:"✓  "; color:#bef264; font-weight:700; }
+.shot { position:absolute; right:40px; top:92px; width:600px; height:540px; border-radius:14px; overflow:hidden; box-shadow:0 30px 70px rgba(0,0,0,.55); background:#0a0b10; border:1px solid rgba(255,255,255,.12); z-index:1; }
+.shot img { width:1000px; display:block; margin-left:-200px; margin-top:-40px; }
+</style></head><body>
+<div class="left">
+  <span class="badge">Python · Flask · SQLite · algorithms · Claude API</span>
+  <h1>Sift: a search engine from scratch</h1>
+  <p class="tag">Crawler, BM25 ranking and autocomplete, no search libraries</p>
+  <pre><span class="k">crawl</span>    robots.txt + rate limit <span class="g">→ 531 docs</span>
+<span class="k">index</span>    22,188 postings <span class="g">→ built in 75 ms</span>
+<span class="k">search</span>   "json dumps" BM25 <span class="g">→ p50 2.4 ms</span>
+<span class="k">suggest</span>  trie "js" <span class="g">→ 11.6 µs</span>
+<span class="k">cache</span>    LRU <span class="w">→ 76% hit rate</span>
+<span class="m">  57 tests, 91% coverage</span></pre>
+  <ul>
+    <li>Hand-written BM25, phrase and exclude queries</li>
+    <li>Trie autocomplete ranked by popularity</li>
+    <li>Analytics: top queries, CTR, zero results</li>
+    <li>Optional AI answer with citations</li>
+  </ul>
+</div>
+<div class="shot"><img src="screenshot-search.png" alt=""></div>
+</body></html>
