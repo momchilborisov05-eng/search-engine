@@ -1,0 +1,20 @@
+services:
+  sift:
+    build: .
+    image: sift-search:latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false          # without it: extractive answers, everything else identical
+    volumes:
+      - sift-data:/data          # SQLite: pages, inverted index, query/click logs
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+volumes:
+  sift-data:

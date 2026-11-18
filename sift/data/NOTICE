@@ -1,0 +1,4 @@
+seed_corpus.jsonl.gz contains docstrings extracted from the CPython standard library
+(Python Software Foundation License Version 2, https://docs.python.org/3/license.html).
+Copyright (c) 2001 Python Software Foundation; All Rights Reserved.
+The pages are rebuilt by scripts/build_seed_corpus.py; each links to the matching docs.python.org entry.

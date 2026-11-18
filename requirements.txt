@@ -1,0 +1,4 @@
+flask>=3.0
+anthropic>=2.2.0        # optional at runtime: only used when ANTHROPIC_API_KEY is set
+python-dotenv>=1.0
+gunicorn>=22.0; platform_system != "Windows"   # production server in Docker

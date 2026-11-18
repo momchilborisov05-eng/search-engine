@@ -1,0 +1,31 @@
+[project]
+name = "sift-search"
+version = "1.0.0"
+description = "A search engine built from scratch: polite crawler, inverted index in SQLite, BM25, trie autocomplete, query analytics and optional cited answers from Claude."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Momchil Borisov" }]
+license = { text = "MIT" }
+dependencies = ["flask>=3.0", "anthropic>=2.2.0", "python-dotenv>=1.0"]
+
+[project.scripts]
+sift = "sift.__main__:main"
+
+[tool.setuptools.package-data]
+sift = ["data/*", "web/static/*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]   # long SQL strings and HTML read better unwrapped
+
+[tool.coverage.run]
+source = ["sift"]
+omit = ["sift/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
